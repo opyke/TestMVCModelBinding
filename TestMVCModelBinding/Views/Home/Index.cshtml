@@ -1,0 +1,43 @@
+﻿@model Payment
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form asp-action="NextPage">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="ClientCode">Client code</label>
+                <input asp-for="ClientCode" class="form-control" />
+                <span asp-validation-for="ClientCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name">Email:</label>
+                <input asp-for="Name" type="email" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            @for (var i = 0; i < Model.Cards.Count; i++)
+            {
+                @Html.HiddenFor(m => Model.Cards[i].Id)
+                @Html.HiddenFor(m => Model.Cards[i].Number)
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="SelectedCard" type="radio" value="@Model.Cards[i].Id" class="form-check-input">@Model.Cards[i].Number
+                        </label>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-envelope"></i> Send Message</button>
+                <div class="text-success">@ViewBag.UserMessage</div>
+            </div>
+        </form>
+    </div>
+</div>
