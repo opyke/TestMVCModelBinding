@@ -16,7 +16,12 @@ namespace TestMVCModelBinding.Models
         public string Name { get; set; }
         public IList<Card> Cards { get; set; }
 
-        [Required]
+        [NotEmpty(ErrorMessage = "Please select a card to use for payment")]
         public Guid SelectedCard { get; set; }
+
+        [Required]
+        [MinLength(3)]
+        [MaxLength(3)]
+        public string Cvv { get; set; }
     }
 }

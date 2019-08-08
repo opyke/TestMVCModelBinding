@@ -28,7 +28,11 @@ namespace TestMVCModelBinding.Controllers
 
         public IActionResult NextPage(Payment model)
         {
-            return View(model);
+            if (ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return BadRequest();
         }
 
         public IActionResult Privacy()
